@@ -1,22 +1,25 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{3C4F30F5-866A-4884-B953-EA2C4F88CB26}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3C4F30F5-866A-4884-B953-EA2C4F88CB26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C4F30F5-866A-4884-B953-EA2C4F88CB26}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3C4F30F5-866A-4884-B953-EA2C4F88CB26}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3C4F30F5-866A-4884-B953-EA2C4F88CB26}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+ private void bttnSendMail_Click(object sender, EventArgs e)
+        {
+            try /*sending mail via gmail using SMTP */
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
+
+                mail.From = new MailAddress("brkytunali@gmail.com");
+                mail.To.Add("simalarda@gmail.com");
+                mail.Subject = "Test Mail";
+                mail.Body = "sending from eBitek AR-GE LTE A.Ş";
+
+                SmtpServer.Port = 587;
+                SmtpServer.Credentials = new System.Net.NetworkCredential("brkytunali@gmail.com", "password");
+                SmtpServer.EnableSsl = true;
+
+                SmtpServer.Send(mail);
+                MessageBox.Show("mail Send");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
